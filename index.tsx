@@ -335,18 +335,45 @@ downloadBtn.addEventListener('click', downloadImage);
 
 // Karşılaştırma Kaydırıcısı
 let isDragging = false;
-sliderHandle.addEventListener('mousedown', () => (isDragging = true));
-document.addEventListener('mouseup', () => (isDragging = false));
-imageComparison.addEventListener('mouseleave', () => (isDragging = false));
-imageComparison.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
+
+function updateSliderPosition(clientX: number) {
   const rect = imageComparison.getBoundingClientRect();
-  const x = e.clientX - rect.left;
+  const x = clientX - rect.left;
   const width = Math.max(0, Math.min(x, rect.width));
   const percentage = (width / rect.width) * 100;
   sliderHandle.style.left = `${percentage}%`;
   beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
-});
+}
+
+function startDragging(e: MouseEvent | TouchEvent) {
+  e.preventDefault();
+  isDragging = true;
+}
+
+function stopDragging() {
+  isDragging = false;
+}
+
+function onDrag(e: MouseEvent | TouchEvent) {
+  if (!isDragging) return;
+  e.preventDefault();
+  if ('clientX' in e) {
+    updateSliderPosition(e.clientX);
+  } else if (e.touches && e.touches.length > 0) {
+    updateSliderPosition(e.touches[0].clientX);
+  }
+}
+
+// Mouse Events
+sliderHandle.addEventListener('mousedown', startDragging);
+document.addEventListener('mouseup', stopDragging);
+imageComparison.addEventListener('mouseleave', stopDragging);
+imageComparison.addEventListener('mousemove', onDrag);
+
+// Touch Events
+sliderHandle.addEventListener('touchstart', startDragging, { passive: false });
+document.addEventListener('touchend', stopDragging);
+imageComparison.addEventListener('touchmove', onDrag, { passive: false });
 
 // --- Başlatma ---
 
