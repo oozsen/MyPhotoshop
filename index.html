@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Özgür'ün Photoshop'u</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/index.css" />
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.16.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <main id="landing-page" class="container">
+      <header class="app-header">
+        <h1>Özgür'ün<span class="accent"> Photoshop'u</span></h1>
+        <p class="subtitle">Yapay Zeka Destekli Görüntü Dönüşümü</p>
+      </header>
+
+      <section class="services-section">
+        <h2>Profesyonel Bir Hizmet Seçin</h2>
+        <div id="services-grid" class="services-grid">
+          <!-- Hizmetler buraya index.tsx tarafından eklenecektir -->
+        </div>
+      </section>
+    </main>
+
+    <main id="editor-page" class="hidden">
+      <div id="upload-container">
+        <div class="upload-content">
+          <div id="upload-icon" class="icon">
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          </div>
+          <h2 id="upload-title">Fotoğraf Restorasyonu için bir resim yükle</h2>
+          <p>Düzenlemeye başlamak için bir dosya sürükleyip bırakın</p>
+          <input type="file" id="file-input" accept="image/*" class="hidden" />
+        </div>
+      </div>
+
+      <div id="editor-container" class="hidden">
+        <div id="image-comparison">
+          <img id="after-image" alt="Sonraki hali" />
+          <img id="before-image" alt="Önceki hali" />
+          <div id="slider-handle">
+            <div class="slider-icon-container"></div>
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <button id="back-to-services" aria-label="Hizmetlere geri dön">
+              <i class="fa-solid fa-arrow-left"></i> Hizmetlere Geri Dön
+            </button>
+          </div>
+          <div class="stepper">
+            <span class="step-number">1.</span> <span class="step-name">HİZMET</span>
+            <span class="step-number active">2.</span> <span id="service-name" class="step-name active"></span>
+            <span class="step-number">3.</span> <span class="step-name">DÜZENLEMENİ TANIMLA</span>
+          </div>
+
+          <div id="refine-task-container" class="form-group hidden">
+            <div class="task-buttons">
+              <button class="task-btn active" data-task="T-shirt">T-shirt</button>
+              <button class="task-btn" data-task="Jeket">Jeket</button>
+              <button class="task-btn" data-task="Pantolon">Pantolon</button>
+              <button class="task-btn" data-task="Ayakkabı">Ayakkabı</button>
+              <button class="task-btn" data-task="Elbise">Elbise</button>
+            </div>
+          </div>
+
+          <div class="form-group prompt-container">
+            <textarea id="prompt-input" rows="4" placeholder="Örn: 'Ceketi mavi yap' veya 'Bu fotoğrafı benim için restore et'"></textarea>
+          </div>
+          <button id="generate-btn">Oluştur</button>
+          <button id="download-btn" class="hidden">
+            <i class="fa-solid fa-download" aria-hidden="true"></i> Düzenlenen Resmi İndir
+          </button>
+          <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            <p>Görüntü işleniyor...</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
