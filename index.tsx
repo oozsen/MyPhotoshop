@@ -76,6 +76,10 @@ function fileToGenerativePart(
 
 // --- DOM Elementlerini Seçme ---
 
+const loginPage = document.getElementById('login-page')!;
+const loginBtn = document.getElementById('login-btn')!;
+const appContainer = document.getElementById('app-container')!;
+
 const landingPage = document.getElementById('landing-page')!;
 const editorPage = document.getElementById('editor-page')!;
 const servicesGrid = document.getElementById('services-grid')!;
@@ -267,31 +271,35 @@ function downloadImage() {
   document.body.removeChild(link);
 }
 
-// --- Olay Dinleyicileri (Event Listeners) ---
+/**
+ * Adds the service cards to the DOM.
+ */
+function createServiceCards() {
+  services.forEach((service) => {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', service.title);
+    card.innerHTML = `
+      <div class="icon"><i class="${service.icon}" aria-hidden="true"></i></div>
+      <h3>${service.title}</h3>
+      <p>${service.description}</p>
+    `;
+    card.addEventListener('click', () => {
+      openEditor(service);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+    servicesGrid.appendChild(card);
+  });
+}
 
-// Servis Kartları
-services.forEach((service) => {
-  const card = document.createElement('div');
-  card.className = 'service-card';
-  card.setAttribute('role', 'button');
-  card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', service.title);
-  card.innerHTML = `
-    <div class="icon"><i class="${service.icon}" aria-hidden="true"></i></div>
-    <h3>${service.title}</h3>
-    <p>${service.description}</p>
-  `;
-  card.addEventListener('click', () => {
-    openEditor(service);
-  });
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.click();
-    }
-  });
-  servicesGrid.appendChild(card);
-});
+// --- Olay Dinleyicileri (Event Listeners) ---
 
 // Apparel task buttons
 taskButtons.forEach((button) => {
@@ -378,21 +386,36 @@ imageComparison.addEventListener('touchmove', onDrag, { passive: false });
 // --- Başlatma ---
 
 /**
- * Uygulamayı başlatır.
+ * Initializes the main application after the user 'logs in'.
  */
-function initialize() {
+function initializeApp() {
   if (!process.env.API_KEY) {
-    document.body.innerHTML = `
-      <div style="padding: 2rem; text-align: center;">
+    appContainer.innerHTML = `
+      <div style="padding: 2rem; text-align: center; color: var(--text-primary);">
         <h1>API Anahtarı Eksik</h1>
         <p>Lütfen ortam değişkenlerinde API_KEY'i ayarlayın.</p>
       </div>
     `;
+    appContainer.classList.remove('hidden');
+    loginPage.classList.add('hidden');
     return;
   }
   ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+  createServiceCards();
+
+  // Show the main app content
+  loginPage.classList.add('hidden');
+  appContainer.classList.remove('hidden');
 }
 
-initialize();
+/**
+ * Sets up the initial login screen.
+ */
+function setupLogin() {
+  loginBtn.addEventListener('click', initializeApp);
+}
+
+setupLogin();
 
 export {};

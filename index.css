@@ -110,7 +110,7 @@ body {
 
 #editor-page {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh; /* Changed from height to min-height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,8 +151,9 @@ body {
 #editor-container {
   display: flex;
   width: 100%;
-  height: 100%;
+  /* height: 100%; Removed to allow container to size to content */
   gap: 2rem;
+  align-items: flex-start; /* Align sidebar and image to the top */
 }
 
 #image-comparison {
@@ -168,9 +169,11 @@ body {
 #after-image,
 #before-image {
   grid-area: 1 / 1;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  /* Let image scale responsively within its container */
+  max-width: 100%;
+  /* Set a max-height to prevent very tall images from breaking the layout */
+  max-height: calc(100vh - 8rem);
+  object-fit: contain; /* Ensures aspect ratio is maintained when scaling down */
   pointer-events: none;
 }
 
@@ -454,4 +457,60 @@ body {
   #upload-container h2 {
     font-size: 1.2rem;
   }
+}
+
+/* Login Page Styles */
+#login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-box {
+  background-color: var(--card-background-color);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+}
+
+.login-box h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.login-box .subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+#login-btn {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+}
+
+#login-btn:hover {
+  background-color: #f5f5f5;
+}
+
+#login-btn svg {
+  fill-rule: nonzero;
 }

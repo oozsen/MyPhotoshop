@@ -21,76 +21,89 @@
 </script>
 </head>
   <body>
-    <main id="landing-page" class="container">
-      <header class="app-header">
+    <main id="login-page" class="container">
+      <div class="login-box">
         <h1>Özgür'ün<span class="accent"> Photoshop'u</span></h1>
-        <p class="subtitle">Yapay Zeka Destekli Görüntü Dönüşümü</p>
-      </header>
-
-      <section class="services-section">
-        <h2>Profesyonel Bir Hizmet Seçin</h2>
-        <div id="services-grid" class="services-grid">
-          <!-- Hizmetler buraya index.tsx tarafından eklenecektir -->
-        </div>
-      </section>
+        <p class="subtitle">Devam etmek için lütfen giriş yapın.</p>
+        <button id="login-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" fill-rule="evenodd"><path d="M9 3.48c1.69 0 2.82.73 3.48 1.34l2.54-2.54C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.96l2.91 2.26C4.63 5.05 6.63 3.48 9 3.48z" fill="#EA4335"></path><path d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.09-1.96 2.99l2.6 2.01c1.6-1.48 2.56-3.6 2.56-6.2z" fill="#4285F4"></path><path d="M3.88 10.73c-.2-.6-.31-1.25-.31-1.94s.11-1.34.31-1.94l-2.92-2.26C.36 5.88 0 7.38 0 9s.36 3.12.96 4.23l2.92-2.26z" fill="#FBBC05"></path><path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.6-2.01c-.8.54-1.86.88-3.36.88-2.37 0-4.38-1.58-5.12-3.74L.96 13.77C2.44 16.5 5.48 18 9 18z" fill="#34A853"></path><path d="M0 0h18v18H0z"></path></g></svg>
+          <span>Google ile Giriş Yap</span>
+        </button>
+      </div>
     </main>
 
-    <main id="editor-page" class="hidden">
-      <div id="upload-container">
-        <div class="upload-content">
-          <div id="upload-icon" class="icon">
-            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-          </div>
-          <h2 id="upload-title">Fotoğraf Restorasyonu için bir resim yükle</h2>
-          <p>Düzenlemeye başlamak için bir dosya sürükleyip bırakın</p>
-          <input type="file" id="file-input" accept="image/*" class="hidden" />
-        </div>
-      </div>
+    <div id="app-container" class="hidden">
+        <main id="landing-page" class="container">
+        <header class="app-header">
+            <h1>Özgür'ün<span class="accent"> Photoshop'u</span></h1>
+            <p class="subtitle">Yapay Zeka Destekli Görüntü Dönüşümü</p>
+        </header>
 
-      <div id="editor-container" class="hidden">
-        <div id="image-comparison">
-          <img id="after-image" alt="Sonraki hali" />
-          <img id="before-image" alt="Önceki hali" />
-          <div id="slider-handle">
-            <div class="slider-icon-container"></div>
-          </div>
-        </div>
-        <aside class="sidebar">
-          <div class="sidebar-header">
-            <button id="back-to-services" aria-label="Hizmetlere geri dön">
-              <i class="fa-solid fa-arrow-left"></i> Hizmetlere Geri Dön
-            </button>
-          </div>
-          <div class="stepper">
-            <span class="step-number">1.</span> <span class="step-name">HİZMET</span>
-            <span class="step-number active">2.</span> <span id="service-name" class="step-name active"></span>
-            <span class="step-number">3.</span> <span class="step-name">DÜZENLEMENİ TANIMLA</span>
-          </div>
-
-          <div id="refine-task-container" class="form-group hidden">
-            <div class="task-buttons">
-              <button class="task-btn active" data-task="T-shirt">T-shirt</button>
-              <button class="task-btn" data-task="Jeket">Jeket</button>
-              <button class="task-btn" data-task="Pantolon">Pantolon</button>
-              <button class="task-btn" data-task="Ayakkabı">Ayakkabı</button>
-              <button class="task-btn" data-task="Elbise">Elbise</button>
+        <section class="services-section">
+            <h2>Profesyonel Bir Hizmet Seçin</h2>
+            <div id="services-grid" class="services-grid">
+            <!-- Hizmetler buraya index.tsx tarafından eklenecektir -->
             </div>
-          </div>
+        </section>
+        </main>
 
-          <div class="form-group prompt-container">
-            <textarea id="prompt-input" rows="4" placeholder="Örn: 'Ceketi mavi yap' veya 'Bu fotoğrafı benim için restore et'"></textarea>
-          </div>
-          <button id="generate-btn">Oluştur</button>
-          <button id="download-btn" class="hidden">
-            <i class="fa-solid fa-download" aria-hidden="true"></i> Düzenlenen Resmi İndir
-          </button>
-          <div id="loader" class="hidden">
-            <div class="spinner"></div>
-            <p>Görüntü işleniyor...</p>
-          </div>
-        </aside>
-      </div>
-    </main>
+        <main id="editor-page" class="hidden">
+        <div id="upload-container">
+            <div class="upload-content">
+            <div id="upload-icon" class="icon">
+                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            </div>
+            <h2 id="upload-title">Fotoğraf Restorasyonu için bir resim yükle</h2>
+            <p>Düzenlemeye başlamak için bir dosya sürükleyip bırakın</p>
+            <input type="file" id="file-input" accept="image/*" class="hidden" />
+            </div>
+        </div>
+
+        <div id="editor-container" class="hidden">
+            <div id="image-comparison">
+            <img id="after-image" alt="Sonraki hali" />
+            <img id="before-image" alt="Önceki hali" />
+            <div id="slider-handle">
+                <div class="slider-icon-container"></div>
+            </div>
+            </div>
+            <aside class="sidebar">
+            <div class="sidebar-header">
+                <button id="back-to-services" aria-label="Hizmetlere geri dön">
+                <i class="fa-solid fa-arrow-left"></i> Hizmetlere Geri Dön
+                </button>
+            </div>
+            <div class="stepper">
+                <span class="step-number">1.</span> <span class="step-name">HİZMET</span>
+                <span class="step-number active">2.</span> <span id="service-name" class="step-name active"></span>
+                <span class="step-number">3.</span> <span class="step-name">DÜZENLEMENİ TANIMLA</span>
+            </div>
+
+            <div id="refine-task-container" class="form-group hidden">
+                <div class="task-buttons">
+                <button class="task-btn active" data-task="T-shirt">T-shirt</button>
+                <button class="task-btn" data-task="Jeket">Jeket</button>
+                <button class="task-btn" data-task="Pantolon">Pantolon</button>
+                <button class="task-btn" data-task="Ayakkabı">Ayakkabı</button>
+                <button class="task-btn" data-task="Elbise">Elbise</button>
+                </div>
+            </div>
+
+            <div class="form-group prompt-container">
+                <textarea id="prompt-input" rows="4" placeholder="Örn: 'Ceketi mavi yap' veya 'Bu fotoğrafı benim için restore et'"></textarea>
+            </div>
+            <button id="generate-btn">Oluştur</button>
+            <button id="download-btn" class="hidden">
+                <i class="fa-solid fa-download" aria-hidden="true"></i> Düzenlenen Resmi İndir
+            </button>
+            <div id="loader" class="hidden">
+                <div class="spinner"></div>
+                <p>Görüntü işleniyor...</p>
+            </div>
+            </aside>
+        </div>
+        </main>
+    </div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
